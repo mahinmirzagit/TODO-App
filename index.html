@@ -11,6 +11,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   </head>
   <body>
     <main class="main">
@@ -18,7 +19,18 @@
         <div class="todaytask">
           <div class="header">
             <h2 class="todotitle">Today's Task</h2>
-            <div class="progress">50%</div>
+            <div class="progress-container">
+              <svg class="progress-circle" width="24" height="24">
+                <circle
+                  class="bg"
+                  style="stroke: white"
+                  cx="12"
+                  cy="12"
+                  r="9"
+                />
+                <circle class="progress" cx="12" cy="12" r="9" />
+              </svg>
+            </div>
           </div>
           <div class="body">
             <ul class="navlinks">
@@ -26,51 +38,7 @@
               <li><button class="tabbtns btn">Weekly</button></li>
               <li><button class="tabbtns btn">Monthly</button></li>
             </ul>
-            <ul class="tasklist">
-              <li>
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  name="task1"
-                  id="task1"
-                />
-                <span class="tasktitle">Task Title</span>
-                <button class="sequencer btn">
-                  <i
-                    class="fa fa-bars"
-                    style="color: #fff; font-size: small"
-                  ></i>
-                </button>
-                <button class="deletetaskbtn btn">
-                  <i
-                    class="fa fa-trash"
-                    style="color: rgb(194, 0, 0); font-size: medium"
-                  ></i>
-                </button>
-              </li>
-              <li class="disabled">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  name="task1"
-                  id="task1"
-                  checked
-                />
-                <span class="tasktitle">Task Title</span>
-                <button class="sequencer btn">
-                  <i
-                    class="fa fa-bars"
-                    style="color: #fff; font-size: small"
-                  ></i>
-                </button>
-                <button class="deletetaskbtn btn">
-                  <i
-                    class="fa fa-trash"
-                    style="color: rgb(194, 0, 0); font-size: medium"
-                  ></i>
-                </button>
-              </li>
-            </ul>
+            <ul class="tasklist" id="tasklist"></ul>
             <div class="prompts">
               <input
                 type="text"
@@ -86,7 +54,7 @@
                 class="note-descrip"
                 placeholder="Description"
               ></textarea>
-              <button class="submitresponse btn">Submit</button>
+              <button class="submitresponse btn">Add New Task</button>
             </div>
           </div>
         </div>

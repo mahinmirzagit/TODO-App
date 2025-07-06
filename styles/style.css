@@ -46,6 +46,28 @@
   margin: 0 10px;
   padding: 5px 10px;
 }
+.progress-container {
+  width: 35px;
+  height: 35px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.progress-circle {
+  transform: rotate(-90deg);
+}
+.progress {
+  stroke: var(--success);
+  stroke-dasharray: 56.52;
+  stroke-dashoffset: 56.52;
+  transition: stroke-dashoffset 0.3s ease;
+}
+circle {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
 .body {
   width: 100%;
   height: auto;
@@ -88,8 +110,8 @@
 }
 .checkbox {
   appearance: none;
-  height: 13px;
   width: 15px;
+  height: 12px;
   background-color: var(--color-white);
   border: none;
   border-radius: 50%;
@@ -118,6 +140,11 @@
   padding: 8px;
   margin: 0 5px;
 }
+.sequencer {
+  cursor: grab;
+  margin-right: 10px;
+}
+
 .prompts {
   width: 100%;
   height: 145px;
@@ -150,10 +177,10 @@
   padding: 8px 10px;
   background-color: var(--bg-inner-card-lighter);
 }
-.submitresponse{
-    width: 100%;
-    height: 35px;
-    background: var(--darker-success);
-    border-radius: 0 0 15px 15px;
-    font-weight: 800;
+.submitresponse {
+  width: 100%;
+  height: 35px;
+  background: var(--darker-success);
+  border-radius: 0 0 15px 15px;
+  font-weight: 800;
 }
