@@ -45,7 +45,6 @@ a {
   background-color: var(--bg-outer-card);
 }
 .disabled {
-  pointer-events: none;
   opacity: 0.5;
 }
 .checkbox:checked {
