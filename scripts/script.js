@@ -1,4 +1,3 @@
-// Store tasks for each tab
 const taskData = {
   Daily: [],
   Weekly: [],
@@ -7,7 +6,6 @@ const taskData = {
 
 let currentTab = "Daily";
 
-// Add SortableJS
 new Sortable(document.querySelector(".tasklist"), {
   animation: 200,
   handle: ".sequencer",
@@ -17,13 +15,11 @@ new Sortable(document.querySelector(".tasklist"), {
     return !evt.related.classList.contains("disabled");
   },
   onEnd: function () {
-    // Save reordered list to taskData
     const items = document.querySelectorAll("#tasklist li");
     taskData[currentTab] = Array.from(items).map((li) => li.outerHTML);
   },
 });
 
-// Add new task
 function addTask() {
   const title = document.getElementById("prompttext").value.trim();
   const desc = document.getElementById("txtarea").value.trim();
@@ -52,7 +48,6 @@ function addTask() {
 
 document.querySelector(".submitresponse").addEventListener("click", addTask);
 
-// Delete or check task
 document.querySelector("#tasklist").addEventListener("click", (e) => {
   const target = e.target;
   const li = target.closest("li");
@@ -83,28 +78,23 @@ function saveTasks() {
   taskData[currentTab] = Array.from(items).map((li) => li.outerHTML);
 }
 
-// Handle tab switching
 const tabButtons = document.querySelectorAll(".tabbtns");
 
 tabButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    // Remove active class from all
     tabButtons.forEach((b) => b.classList.remove("active"));
-    // Add active to clicked
+
     btn.classList.add("active");
 
-    // Change tab
     currentTab = btn.innerText;
     loadTasks();
   });
 });
 
-// Load tasks for selected tab
 function loadTasks() {
   const list = document.getElementById("tasklist");
   list.innerHTML = taskData[currentTab].join("");
   updateProgress();
 }
 
-// Initial load
 loadTasks();
