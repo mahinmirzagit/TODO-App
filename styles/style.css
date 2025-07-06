@@ -24,13 +24,6 @@
   border-radius: 20px 0 0 20px;
   border-right: 1px solid var(--border);
 }
-.sidetabs {
-  width: 70%;
-  height: 100%;
-  background-color: var(--bg-outer-card);
-  border-radius: 0 20px 20px 0;
-  border-left: 1px solid var(--border);
-}
 .header {
   display: flex;
   justify-content: space-between;
@@ -58,7 +51,7 @@
   transform: rotate(-90deg);
 }
 .progress {
-  stroke: var(--success);
+  stroke: var(--seconday);
   stroke-dasharray: 56.52;
   stroke-dashoffset: 56.52;
   transition: stroke-dashoffset 0.3s ease;
@@ -86,7 +79,7 @@ circle {
 }
 .tabbtns {
   padding: 8px 15px;
-  width: 130px;
+  width: 100%;
   color: var(--text-muted);
   text-align: center;
   border: 1px solid var(--border);
@@ -183,4 +176,76 @@ circle {
   background: var(--darker-success);
   border-radius: 0 0 15px 15px;
   font-weight: 800;
+}
+.sidetabs {
+  width: 70%;
+  height: 100%;
+  background-color: var(--bg-outer-card);
+  border-radius: 0 20px 20px 0;
+  border-left: 1px solid var(--border);
+}
+.sidetabnavs{
+  width: 95%;
+  height: 60px;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+  list-style: none;
+}
+.sidetabnavs li{
+  width: 100%;
+  margin: 10px 0;
+}
+.sidetabnavs button, .navlinks li{
+  width: 100%;
+}
+.taskinfolist{
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 10px;
+  height: calc(100% - 80px);
+  overflow: auto;
+  margin: 10px;
+}
+.infocard{
+  padding: 10px;
+  height: 150px;
+  background-color: var(--bg-inner-card-lighter);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.infotitle{
+  font-size: 26px;
+  color: var(--text-main);
+  margin-bottom: 5px;
+}
+.infodesc{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.infostatus{
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.infocard button{
+  background-color: var(--primary);
+  padding: 4px 15px;
+  border-radius: 6px;
+  color: var(--dark);
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
 }

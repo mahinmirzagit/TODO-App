@@ -1,104 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkbox Progress Circle</title>
-  <style>
-    .progressbar {
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      margin-top: 40px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkbox Progress Circle</title>
+    <style>
+      .tabcontent {
+  padding: 10px;
+  color: var(--text-main);
+  height: calc(100% - 60px);
+  overflow-y: auto;
+}
 
-    .progress-container {
-      width: 150px;
-      height: 150px;
-      position: relative;
-    }
+.taskbox {
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: var(--bg-inner-card-lighter);
+}
 
-    .progress-circle {
-      transform: rotate(-90deg);
-    }
+.taskbox h4 {
+  margin-bottom: 5px;
+  color: var(--accent);
+}
 
-    circle {
-      fill: none;
-      stroke-width: 10;
-      stroke-linecap: round;
-    }
+.taskbox p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
 
-    .bg {
-      stroke: #eee;
-    }
+.edit-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
 
-    .progress {
-      stroke: #00bcd4;
-      stroke-dasharray: 440;
-      stroke-dashoffset: 440;
-      transition: stroke-dashoffset 0.3s ease;
-    }
+.edit-btns button {
+  background-color: var(--secondary);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
 
-    .progress-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-      font-weight: bold;
-    }
 
-    .checkboxes label {
-      display: block;
-      margin: 5px;
-    }
-  </style>
-</head>
-<body>
+    </style>
+  </head>
+  <body>
+    <div class="sidetabs">
+  <ul class="navlinks">
+    <li><button class="tabbtns btn active" data-tab="taskinfo">Task Info</button></li>
+    <li><button class="tabbtns btn" data-tab="nextday">Next Day</button></li>
+    <li><button class="tabbtns btn" data-tab="notes">Notes</button></li>
+  </ul>
 
-<div class="progress-container">
-  <svg class="progress-circle" width="50">
-    <circle class="bg" cx="75" cy="75" r="70" />
-    <circle class="progress" cx="75" cy="75" r="70" />
-  </svg>
-  <div class="progress-text" id="progress-text">0%</div>
+  <div class="tabcontent" id="taskinfo"></div>
+  <div class="tabcontent" id="nextday" style="display: none"></div>
+  <div class="tabcontent" id="notes" style="display: none"></div>
 </div>
 
-<div class="checkboxes">
-  <label><input type="checkbox" class="task" /> Task 1</label>
-  <label><input type="checkbox" class="task" /> Task 2</label>
-  <label><input type="checkbox" class="task" /> Task 3</label>
-  <label><input type="checkbox" class="task" /> Task 4</label>
-  <label><input type="checkbox" class="task" /> Task 5</label>
-  <label><input type="checkbox" class="task" /> Task 5</label>
-  <label><input type="checkbox" class="task" /> Task 5</label>
-  <label><input type="checkbox" class="task" /> Task 5</label>
-  <label><input type="checkbox" class="task" /> Task 5</label>
-</div>
 
-<script>
-  const checkboxes = document.querySelectorAll('.task');
-  const progressCircle = document.querySelector('.progress');
-  const progressText = document.getElementById('progress-text');
-  const circleLength = 2 * Math.PI * 70; // 2πr, r = 70 // 
 
-  function updateProgress() {
-    const checkedCount = document.querySelectorAll('.task:checked').length;
-    const total = checkboxes.length;
-    const percentage = Math.round((checkedCount / total) * 100);
+    <script>
+      const taskData = {
+        Daily: [],
+        Weekly: [],
+        Monthly: [],
+      };
 
-    const offset = circleLength * (1 - percentage / 100);
-    progressCircle.style.strokeDashoffset = offset;
-    progressText.textContent = `${percentage}%`;
-  }
+      let currentTab = "Daily";
 
-  checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+      new Sortable(document.querySelector(".tasklist"), {
+        animation: 200,
+        handle: ".sequencer",
+        ghostClass: "dragging",
+        filter: ".disabled",
+        onMove: function (evt) {
+          return !evt.related.classList.contains("disabled");
+        },
+        onEnd: function () {
+          const items = document.querySelectorAll("#tasklist li");
+          taskData[currentTab] = Array.from(items).map((li) => li.outerHTML);
+        },
+      });
 
-  // Init on load
-  updateProgress();
-</script>
+      function addTask() {
+        const title = document.getElementById("prompttext").value.trim();
+        const desc = document.getElementById("txtarea").value.trim();
 
-</body>
+        if (!title) return alert("Please enter a task title.");
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+      <input type="checkbox" class="checkbox" />
+      <span class="tasktitle">${title}</span>
+      <button class="sequencer btn">
+        <i class="fa fa-bars" style="color: #fff; font-size: small"></i>
+      </button>
+      <button class="deletetaskbtn btn">
+        <i class="fa fa-trash" style="color: rgb(194, 0, 0); font-size: medium"></i>
+      </button>
+    `;
+
+        document.getElementById("tasklist").appendChild(li);
+        taskData[currentTab].push(li.outerHTML);
+        document.getElementById("prompttext").value = "";
+        document.getElementById("txtarea").value = "";
+
+        updateProgress();
+      }
+
+      document
+        .querySelector(".submitresponse")
+        .addEventListener("click", addTask);
+
+      document.querySelector("#tasklist").addEventListener("click", (e) => {
+        const target = e.target;
+        const li = target.closest("li");
+
+        if (target.closest(".deletetaskbtn")) {
+          li.remove();
+          saveTasks();
+          updateProgress();
+        }
+
+        if (target.classList.contains("checkbox")) {
+          li.classList.toggle("disabled", target.checked);
+          updateProgress();
+        }
+      });
+
+      function updateProgress() {
+        const tasks = document.querySelectorAll(".tasklist li");
+        const completed = document.querySelectorAll(
+          ".tasklist .checkbox:checked"
+        );
+        const progress = document.querySelector(".progress");
+        const percent = tasks.length
+          ? (completed.length / tasks.length) * 100
+          : 0;
+        const dashOffset = 56.52 - (percent / 100) * 56.52;
+        progress.style.strokeDashoffset = dashOffset.toFixed(2);
+      }
+
+      function saveTasks() {
+        const items = document.querySelectorAll("#tasklist li");
+        taskData[currentTab] = Array.from(items).map((li) => li.outerHTML);
+      }
+
+      const tabButtons = document.querySelectorAll(".tabbtns");
+
+      tabButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          tabButtons.forEach((b) => b.classList.remove("active"));
+
+          btn.classList.add("active");
+
+          currentTab = btn.innerText;
+          loadTasks();
+        });
+      });
+
+      function loadTasks() {
+        const list = document.getElementById("tasklist");
+        list.innerHTML = taskData[currentTab].join("");
+        updateProgress();
+      }
+
+      loadTasks();
+    </script>
+  </body>
 </html>

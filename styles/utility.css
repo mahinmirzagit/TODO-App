@@ -44,8 +44,11 @@ a {
   color: var(--text-main) !important;
   background-color: var(--bg-outer-card);
 }
+.active2 {
+  color: var(--text-main) !important;
+  background-color: var(--bg-inner-card) !important;
+}
 .disabled {
-  pointer-events: none;
   opacity: 0.5;
 }
 .checkbox:checked {
@@ -71,9 +74,6 @@ a {
 }
 *::-webkit-scrollbar-thumb:hover {
   background-color: var(--text-muted);
-}
-.progress-container:hover .progress {
-  stroke-dashoffset: 28.26;
 }
 @keyframes checkbox-checked {
   0% {
