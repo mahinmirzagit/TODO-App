@@ -20,11 +20,10 @@
   --border-light: #3a3e4a;
   --border-lighter: #65676e;
 
-  --color-white: #ffffff;
-
   --text-main: #ffffff;
   --text-muted: #989c9e;
 
+  --color-white: #ffffff;
   --success: #00c853;
   --darker-success: #00ab47;
   --danger: #ff5252;

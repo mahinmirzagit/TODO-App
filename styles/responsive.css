@@ -1,0 +1,87 @@
+@media (min-width: 2560px) {
+  .todotitle {
+    font-size: 2.3rem;
+  }
+  .progress-container {
+    width: 50px;
+    height: 50px;
+  }
+  .progress-circle {
+    width: 44px;
+    height: 44px;
+  }
+  .bg,
+  .progress {
+    cx: 22;
+    cy: 22;
+    r: 16;
+  }
+  circle {
+    stroke-width: 8;
+  }
+  .tabbtns {
+    font-size: 1.5rem;
+    height: 50px;
+  }
+  .tasklist {
+    gap: 30px;
+  }
+  .checkbox {
+    padding: 8px;
+  }
+  .tasktitle {
+    font-size: 1.5rem;
+  }
+  .sequencer,
+  .deletetaskbtn {
+    margin: 0 15px;
+  }
+  i {
+    font-size: 1.3rem;
+  }
+  .prompts {
+    height: 170px;
+  }
+  .prompttext {
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  .note-descrip {
+    height: 80px;
+    font-size: 1.5rem;
+  }
+  .submitresponse {
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  .taskinfolist {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .infocard {
+    max-width: 49%;
+    height: 300px;
+  }
+  .infotitle {
+    font-size: 2.3rem;
+    margin-bottom: 15px;
+  }
+  .infodesc {
+    -webkit-line-clamp: 4;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  .infostatus {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    bottom: 40px;
+  }
+  .infocard button {
+    bottom: 8px;
+    padding: 4px 25px;
+    border-radius: 6px;
+    font-size: 1.5rem;
+  }
+}
