@@ -131,5 +131,4 @@ function updateProgress() {
   document.querySelector(".progress").style.strokeDashoffset =
     dashOffset.toFixed(2);
 }
-
 loadTasks();
