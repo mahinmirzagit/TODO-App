@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 1px;
+  font-weight: lighter;
+}
+:root {
+  --primary: #7c4dff;
+  --secondary: #00e5ff;
+  --accent: #ffea00;
+
+  --bg-main: #0f111a;
+  --bg-outer-card: #1c1f2a;
+  --bg-outer-card-lighter: #2c3142;
+  --bg-inner-card: #272b38;
+  --bg-inner-card-lighter: #3a4052;
+  --border: #2e3344;
+  --border-light: #3a3e4a;
+  --border-lighter: #65676e;
+
+  --color-white: #ffffff;
+
+  --text-main: #ffffff;
+  --text-muted: #989c9e;
+
+  --success: #00c853;
+  --darker-success: #00ab47;
+  --danger: #ff5252;
+  --separator: #646b7d;
+}
+a {
+  text-decoration: none;
+  color: unset;
+}
+.btn {
+  background-color: unset;
+  border: unset;
+  outline: unset;
+  cursor: pointer;
+}
+.active {
+  color: var(--text-main) !important;
+  background-color: var(--bg-outer-card);
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.checkbox:checked {
+  width: 15px;
+  height: 13px;
+  background-color: var(--success);
+  animation: checkbox-checked 0.5s ease-in-out;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bg-outer-card);
+}
+*::-webkit-scrollbar {
+  width: 4px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--bg-outer-card);
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--border-lighter);
+  border-radius: 10px;
+  border: 2px solid var(--border-lighter);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted);
+}
+@keyframes checkbox-checked {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

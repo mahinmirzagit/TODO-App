@@ -1,11 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO List</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="styles/utility.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/responsive.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <main class="main">
+      <div class="container">
+        <div class="todaytask">
+          <div class="header">
+            <h2 class="todotitle">Today's Task</h2>
+            <div class="progress">50%</div>
+          </div>
+          <div class="body">
+            <ul class="navlinks">
+              <li><button class="tabbtns btn active">Daily</button></li>
+              <li><button class="tabbtns btn">Weekly</button></li>
+              <li><button class="tabbtns btn">Monthly</button></li>
+            </ul>
+            <ul class="tasklist">
+              <li>
+                <input
+                  type="checkbox"
+                  class="checkbox"
+                  name="task1"
+                  id="task1"
+                />
+                <span class="tasktitle">Task Title</span>
+                <button class="sequencer btn">
+                  <i
+                    class="fa fa-bars"
+                    style="color: #fff; font-size: small"
+                  ></i>
+                </button>
+                <button class="deletetaskbtn btn">
+                  <i
+                    class="fa fa-trash"
+                    style="color: rgb(194, 0, 0); font-size: medium"
+                  ></i>
+                </button>
+              </li>
+              <li class="disabled">
+                <input
+                  type="checkbox"
+                  class="checkbox"
+                  name="task1"
+                  id="task1"
+                  checked
+                />
+                <span class="tasktitle">Task Title</span>
+                <button class="sequencer btn">
+                  <i
+                    class="fa fa-bars"
+                    style="color: #fff; font-size: small"
+                  ></i>
+                </button>
+                <button class="deletetaskbtn btn">
+                  <i
+                    class="fa fa-trash"
+                    style="color: rgb(194, 0, 0); font-size: medium"
+                  ></i>
+                </button>
+              </li>
+            </ul>
+            <div class="prompts">
+              <input
+                type="text"
+                name="prompttext"
+                id="prompttext"
+                class="prompttext"
+                placeholder="New task"
+                maxlength="150"
+              />
+              <textarea
+                name="txtarea"
+                id="txtarea"
+                class="note-descrip"
+                placeholder="Description"
+              ></textarea>
+              <button class="submitresponse btn">Submit</button>
+            </div>
+          </div>
+        </div>
+        <div class="sidetabs"></div>
+      </div>
+    </main>
+    <script src="scripts/script.js"></script>
+  </body>
 </html>
