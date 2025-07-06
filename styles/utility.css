@@ -51,8 +51,6 @@ a {
   opacity: 0.5;
 }
 .checkbox:checked {
-  width: 15px;
-  height: 12px;
   background-color: var(--success);
   animation: checkbox-checked 0.5s ease-in-out;
 }
@@ -74,6 +72,50 @@ a {
 *::-webkit-scrollbar-thumb:hover {
   background-color: var(--text-muted);
 }
+.todotitle:hover {
+  text-shadow: #ffffff 0px 0px 8px;
+}
+.progress-container:hover > .progress-circle {
+  transform: scale(2.2);
+}
+.progress-circle:hover circle {
+  stroke-width: 2;
+}
+.progress-circle:hover ~ .progresspercent {
+  display: unset;
+}
+.tabbtns:hover {
+  background-color: var(--bg-outer-card);
+}
+.tasklist li:hover {
+  background-color: var(--bg-outer-card-lighter);
+}
+i:hover {
+  transform: scale(1.2);
+}
+.note-descrip:focus,
+.prompttext:focus {
+  background-color: var(--bg-outer-card-lighter);
+}
+.submitresponse:hover{
+  background-color: var(--success)
+}
+.submitresponse:active{
+  background-color: var(--darker-success)
+}
+.sidetabbtns:hover{
+  background-color: var(--bg-inner-card);
+}
+.infocard:hover{
+  background-color: var(--bg-inner-card);
+}
+.infocard button:hover{
+  opacity: 0.7;
+}
+.infocard button:active{
+  opacity: 1;
+}
+
 @keyframes checkbox-checked {
   0% {
     transform: scale(1);

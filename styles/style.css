@@ -39,10 +39,12 @@
   color: var(--text-main);
   margin: 0 10px;
   padding: 5px 10px;
+  transition: all 0.3s ease;
 }
 .progress-container {
   width: 35px;
   height: 35px;
+  background-color: transparent;
   position: relative;
   display: flex;
   justify-content: center;
@@ -52,6 +54,7 @@
   transform: rotate(-90deg);
   width: 24px;
   height: 24px;
+  transition: all 0.3s ease;
 }
 .bg,
 .progress {
@@ -69,6 +72,16 @@ circle {
   fill: none;
   stroke-width: 4;
   stroke-linecap: round;
+}
+.progresspercent{
+  position: absolute;
+  display: none;
+  font-weight: 800;
+  cursor:none;
+  pointer-events: none;
+  font-size: 8pt;
+  letter-spacing: -1px;
+  color: rgb(227, 112, 112);
 }
 .body {
   width: 100%;
@@ -104,7 +117,7 @@ circle {
   flex-direction: column;
   gap: 20px;
   list-style: none;
-  overflow: auto;
+  overflow: hidden auto;
 }
 .tasklist li {
   display: flex;
@@ -140,11 +153,11 @@ circle {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  padding: 8px;
+  padding: 10px;
   margin: 0 10px;
 }
 i {
+  transition: all 0.2s ease;
   font-size: medium;
 }
 .sequencer {
@@ -265,5 +278,5 @@ i {
   color: var(--dark);
   font-weight: bold;
   font-size: 16px;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
 }
