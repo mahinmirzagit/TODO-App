@@ -6,8 +6,4 @@ new Sortable(document.querySelector(".tasklist"), {
   onMove: function (evt) {
     return !evt.related.classList.contains("disabled");
   },
-  // onEnd: function () {
-  //   const items = document.querySelectorAll("#tasklist li");
-  //   taskData[currentTab] = Array.from(items).map((li) => li.outerHTML);
-  // },
 });
