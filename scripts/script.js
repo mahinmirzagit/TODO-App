@@ -96,5 +96,4 @@ function loadTasks() {
   list.innerHTML = taskData[currentTab].join("");
   updateProgress();
 }
-
 loadTasks();
