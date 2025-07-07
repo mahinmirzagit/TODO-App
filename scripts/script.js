@@ -2,8 +2,16 @@ let promtText = document.querySelector(".prompttext");
 let descrip = document.querySelector(".note-descrip");
 let addBtn = document.querySelector(".submitresponse");
 
-const tabButtons = document.querySelectorAll(".tabbtns");
-const tabContents = document.querySelectorAll("[data-tab-content]");
+// LEFT TASK TAB BUTTONS
+const taskTabButtons = document.querySelectorAll(".navlinks .tabbtns");
+const taskTabContents = document.querySelectorAll("[data-tab-content]");
+
+// RIGHT SIDEBAR TABS
+const sideTabButtons = document.querySelectorAll(".sidetabnavs .sidetabbtns");
+const infoTab = document.getElementById("infoTab");
+const notesTab1 = document.getElementById("notesTab");
+// (optional) upcomingTab if you create one
+
 let activeTab = "daily";
 
 const progressCircle = document.querySelector(".progress");
@@ -20,19 +28,30 @@ let isNoteMode = false;
 let completedTaskTitle = "";
 const notesTab = document.getElementById("notesTab");
 
-tabButtons.forEach((btn) => {
+taskTabButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    if (btn.dataset.tab) {
-      tabButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeTab = btn.dataset.tab;
-      tabContents.forEach((list) => {
-        list.classList.toggle("hidden", list.id !== activeTab);
-      });
-      updateProgress();
-    }
+    taskTabButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeTab = btn.dataset.tab;
+    taskTabContents.forEach(list => {
+      list.classList.toggle("hidden", list.id !== activeTab);
+    });
+    updateProgress();
   });
 });
+sideTabButtons.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    sideTabButtons.forEach(b => b.classList.remove("active2"));
+    btn.classList.add("active2");
+
+    // Toggle right panel views
+    const tabs = [infoTab, notesTab]; // Add upcomingTab if needed
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle("hidden", i !== index);
+    });
+  });
+});
+
 
 addBtn.addEventListener("click", function () {
   const title = promtText.value.trim();
@@ -41,32 +60,39 @@ addBtn.addEventListener("click", function () {
   if (title === "") return;
 
   if (isNoteMode) {
-    const noteItem = document.createElement("li");
-    noteItem.classList.add("infocard");
+  const noteItem = document.createElement("li");
+  noteItem.classList.add("infocard");
 
-    const now = new Date();
-    const timeString = now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const dateString = now.toLocaleDateString();
-    const weekday = now.toLocaleDateString(undefined, { weekday: "long" });
+  const now = new Date();
+  const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const dateString = now.toLocaleDateString();
+  const weekday = now.toLocaleDateString(undefined, { weekday: 'long' });
 
-    noteItem.innerHTML = `
-      <h3 class="infotitle">${title}</h3>
-      <span class="infodesc">${note || "(no content)"}</span>
-      <div class="infostatus">Saved on ${weekday}, ${dateString} at ${timeString}</div>
-      <button class="btn infoeditbtn">Edit</button>
-    `;
-    notesTab.appendChild(noteItem);
+  // Get title and description from completed task (if still in DOM)
+  const matchingTask = Array.from(document.querySelectorAll(".tasklist li"))
+    .find(task => task.querySelector(".tasktitle")?.textContent === completedTaskTitle);
 
-    promtText.value = "";
-    descrip.value = "";
-    descrip.placeholder = "Description";
-    addBtn.textContent = "Add New Task";
-    isNoteMode = false;
-    completedTaskTitle = "";
-  } else {
+  const taskDescription = matchingTask?.getAttribute("data-desc") || "(no description)";
+
+  noteItem.innerHTML = `
+    <h3 class="infotitle">${completedTaskTitle}</h3>
+    <span class="infodesc"><strong>Task Description:</strong> ${taskDescription}</span>
+    <span class="infodesc"><strong>Note:</strong> ${note || "(no note provided)"}</span>
+    <div class="infostatus">Saved on ${weekday}, ${dateString} at ${timeString}</div>
+    <button class="btn infoeditbtn">Edit</button>
+  `;
+
+  notesTab.appendChild(noteItem);
+
+  // Reset
+  promtText.value = "";
+  descrip.value = "";
+  descrip.placeholder = "Description";
+  addBtn.textContent = "Add New Task";
+  isNoteMode = false;
+  completedTaskTitle = "";
+}
+ else {
     addTask(promtText);
     promtText.value = "";
     descrip.value = "";
