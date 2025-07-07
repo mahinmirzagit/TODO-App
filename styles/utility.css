@@ -53,6 +53,10 @@ a {
 .disabled {
   opacity: 0.5;
 }
+.hidden {
+  display: none !important;
+}
+
 .checkbox:checked {
   background-color: var(--success);
   animation: checkbox-checked 0.5s ease-in-out;
@@ -137,5 +141,16 @@ a {
   }
   100% {
     transform: scale(1);
+  }
+}
+@keyframes progressPulse {
+  0% {
+    stroke: #ff4d4d;
+  }
+  50% {
+    stroke: #ffb84d;
+  }
+  100% {
+    stroke: #4dff4d;
   }
 }

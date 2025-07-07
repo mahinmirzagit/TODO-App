@@ -66,8 +66,9 @@
   stroke: var(--seconday);
   stroke-dasharray: 56.52;
   stroke-dashoffset: 56.52;
-  transition: stroke-dashoffset 0.3s ease;
+  transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
 }
+
 circle {
   fill: none;
   stroke-width: 4;
@@ -119,7 +120,7 @@ circle {
   list-style: none;
   overflow: hidden auto;
 }
-.tasklists-container{
+.tasklists-container {
   width: 100%;
 }
 .tasklist li {
@@ -294,13 +295,17 @@ i {
   width: 300px;
   height: 200px;
   top: 38%;
-  gap: 0;
   left: 40%;
+  gap: 0;
   display: flex;
-  visibility: hidden;
   flex-direction: column;
   justify-content: space-around;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
 .modalbox > h4 {
   font-size: 18pt;
   padding-bottom: 5px;
@@ -330,4 +335,13 @@ i {
 .modalbox .buttons > button {
   width: 50%;
   height: 30px;
+}
+.modalbox {
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.modalbox.show {
+  visibility: visible !important;
+  opacity: 1;
 }

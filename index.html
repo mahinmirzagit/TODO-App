@@ -29,11 +29,25 @@
           </div>
           <div class="body">
             <ul class="navlinks">
-              <li><button class="tabbtns btn active">Daily</button></li>
-              <li><button class="tabbtns btn">Weekly</button></li>
-              <li><button class="tabbtns btn">Monthly</button></li>
+              <li>
+                <button class="tabbtns btn active" data-tab="daily">
+                  Daily
+                </button>
+              </li>
+              <li>
+                <button class="tabbtns btn" data-tab="weekly">Weekly</button>
+              </li>
+              <li>
+                <button class="tabbtns btn" data-tab="monthly">Monthly</button>
+              </li>
             </ul>
-            <ul class="tasklist" id="tasklist"></ul>
+
+            <div class="tasklists-container">
+              <ul class="tasklist" id="daily" data-tab-content></ul>
+              <ul class="tasklist hidden" id="weekly" data-tab-content></ul>
+              <ul class="tasklist hidden" id="monthly" data-tab-content></ul>
+            </div>
+
             <div class="prompts">
               <input
                 type="text"
@@ -156,24 +170,29 @@
         </div>
       </div>
 
-      <div class="modalbox">
+      <div class="modalbox" id="modalbox">
         <h4>Delete?</h4>
-        <p class="span1">Do you want to this note?</p>
-        <span class="span2"
-          ><p>Title : Task 1</p>
-          <p>Description : Task Description</p></span
-        >
-        <span class="buttons"
-          ><button
+        <p class="span1">Do you want to delete this task?</p>
+        <span class="span2">
+          <p id="modal-task-title">Title:</p>
+          <p id="modal-task-desc">Description:</p>
+        </span>
+        <span class="buttons">
+          <button
             class="btn confirmbtn"
+            id="confirmDelete"
             style="background-color: var(--success)"
           >
             Yes
           </button>
-          <button class="btn cancelbtn" style="background-color: var(--danger)">
+          <button
+            class="btn cancelbtn"
+            id="cancelDelete"
+            style="background-color: var(--danger)"
+          >
             No
-          </button></span
-        >
+          </button>
+        </span>
       </div>
     </main>
     <script src="scripts/script.js"></script>
