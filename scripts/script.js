@@ -11,20 +11,17 @@ function addTask(promt) {
     </button>
   `;
 
-  // Add to top
   taskList.prepend(newTask);
 
-  // Bind checkbox event for new task
   newTask.querySelector(".checkbox").addEventListener("change", function () {
     if (this.checked) {
       newTask.classList.add("disabled");
-      taskList.appendChild(newTask); // Move to bottom
+      taskList.appendChild(newTask);
     } else {
       newTask.classList.remove("disabled");
     }
   });
 }
-
 
 let promtText = document.querySelector(".prompttext");
 let descrip = document.querySelector(".note-descrip");
@@ -55,7 +52,7 @@ document.querySelectorAll(".checkbox").forEach((btn) => {
     if (btn.checked) {
       taskItem.classList.add("disabled");
       taskItem.classList.add("disabled");
-      taskList.appendChild(taskItem); // Move to bottom
+      taskList.appendChild(taskItem);
     } else {
       taskItem.classList.remove("disabled");
     }
