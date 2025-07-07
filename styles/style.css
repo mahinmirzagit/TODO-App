@@ -119,9 +119,13 @@ circle {
   list-style: none;
   overflow: hidden auto;
 }
+.tasklists-container{
+  width: 100%;
+}
 .tasklist li {
   display: flex;
   padding: 10px;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-light);

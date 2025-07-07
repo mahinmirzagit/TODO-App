@@ -1,18 +1,30 @@
 function addTask(promt) {
   let newTask = document.createElement("li");
-  console.log(newTask);
   newTask.innerHTML = `
-  <input type="checkbox" class="checkbox" />
-  <span class="tasktitle">${promt.value || "No Title"}</span>
-  <button class="sequencer btn">
-    <i class="fa fa-bars" style="color: #fff"></i>
-  </button>
-  <button class="deletetaskbtn btn">
-    <i class="fa fa-trash" style="color: rgb(194, 0, 0)"></i>
-  </button>
+    <input type="checkbox" class="checkbox" />
+    <span class="tasktitle">${promt.value || "No Title"}</span>
+    <button class="sequencer btn">
+      <i class="fa fa-bars" style="color: #fff"></i>
+    </button>
+    <button class="deletetaskbtn btn">
+      <i class="fa fa-trash" style="color: rgb(194, 0, 0)"></i>
+    </button>
   `;
-  taskList.appendChild(newTask);
+
+  // Add to top
+  taskList.prepend(newTask);
+
+  // Bind checkbox event for new task
+  newTask.querySelector(".checkbox").addEventListener("change", function () {
+    if (this.checked) {
+      newTask.classList.add("disabled");
+      taskList.appendChild(newTask); // Move to bottom
+    } else {
+      newTask.classList.remove("disabled");
+    }
+  });
 }
+
 
 let promtText = document.querySelector(".prompttext");
 let descrip = document.querySelector(".note-descrip");
@@ -37,12 +49,15 @@ addBtn.addEventListener("click", function () {
   }
 });
 
-checkBox.forEach((btn) => {
+document.querySelectorAll(".checkbox").forEach((btn) => {
   btn.addEventListener("change", function () {
+    let taskItem = btn.parentElement;
     if (btn.checked) {
-      btn.parentElement.classList.add("disabled");
+      taskItem.classList.add("disabled");
+      taskItem.classList.add("disabled");
+      taskList.appendChild(taskItem); // Move to bottom
     } else {
-      btn.parentElement.classList.remove("disabled");
+      taskItem.classList.remove("disabled");
     }
   });
 });
