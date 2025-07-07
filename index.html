@@ -21,12 +21,19 @@
             <h2 class="todotitle">Today's Tasks</h2>
             <div class="progress-container">
               <svg class="progress-circle">
-                <circle class="bg" style="stroke: white" />
-                <circle class="progress" />
+                <circle
+                  class="bg"
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  style="stroke: white"
+                />
+                <circle class="progress" cx="12" cy="12" r="9" />
               </svg>
-              <span class="progresspercent">100 %</span>
+              <span class="progresspercent">0%</span>
             </div>
           </div>
+
           <div class="body">
             <ul class="navlinks">
               <li>
@@ -67,6 +74,7 @@
             </div>
           </div>
         </div>
+
         <div class="sidetabs">
           <ul class="sidetabnavs">
             <li>
@@ -75,98 +83,20 @@
             <li><button class="btn tabbtns sidetabbtns">Notes</button></li>
             <li><button class="btn tabbtns sidetabbtns">Upcoming</button></li>
           </ul>
-          <ul class="taskinfolist">
+
+          <ul class="taskinfolist" id="infoTab">
             <li class="infocard">
               <h3 class="infotitle">Title</h3>
-              <span class="infodesc"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-                quia dolorem fugit? Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. A quam tempora voluptates corrupti facere
-                optio quibusdam autem reiciendis nisi quae, recusandae
-                reprehenderit placeat exercitationem velit adipisci corporis quo
-                officia asperiores odit ullam.</span
-              >
+              <span class="infodesc">Lorem ipsum dolor sit amet...</span>
               <div class="infostatus">
                 Status :
                 <i class="fa fa-cancel" style="color: red"></i> Incompleted
-              </div>
-              <button class="btn infoeditbtn">Edit</button>
-            </li>
-            <li class="infocard">
-              <h3 class="infotitle">Title</h3>
-              <span class="infodesc"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-                quia dolorem fugit? Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. A quam tempora voluptates corrupti facere
-                optio quibusdam autem reiciendis nisi quae, recusandae
-                reprehenderit placeat exercitationem velit adipisci corporis quo
-                officia asperiores odit ullam.</span
-              >
-              <div class="infostatus">
-                Status :
-                <i class="fa fa-cancel" style="color: red"></i> Incompleted
-              </div>
-              <button class="btn infoeditbtn">Edit</button>
-            </li>
-            <li class="infocard">
-              <h3 class="infotitle">Title</h3>
-              <span class="infodesc"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-                quia dolorem fugit? Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. A quam tempora voluptates corrupti facere
-                optio quibusdam autem reiciendis nisi quae, recusandae
-                reprehenderit placeat exercitationem velit adipisci corporis quo
-                officia asperiores odit ullam.</span
-              >
-              <div class="infostatus">
-                Status :
-                <i class="fa fa-cancel" style="color: red"></i> Incompleted
-              </div>
-              <button class="btn infoeditbtn">Edit</button>
-            </li>
-            <li class="infocard">
-              <h3 class="infotitle">Title</h3>
-              <span class="infodesc"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-                quia dolorem fugit? Lorem, ipsum dolor sit amet
-                consectetur.</span
-              >
-              <div class="infostatus">
-                Status :
-                <i class="fa fa-check-circle" style="color: greenyellow"></i>
-                Completed
-              </div>
-              <button class="btn infoeditbtn">Edit</button>
-            </li>
-            <li class="infocard">
-              <h3 class="infotitle">Title</h3>
-              <span class="infodesc"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-                quia dolorem fugit? Lorem, ipsum dolor sit amet
-                consectetur.</span
-              >
-              <div class="infostatus">
-                Status :
-                <i class="fa fa-check-circle" style="color: greenyellow"></i>
-                Completed
-              </div>
-              <button class="btn infoeditbtn">Edit</button>
-            </li>
-            <li class="infocard">
-              <h3 class="infotitle">Title</h3>
-              <span class="infodesc"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-                quia dolorem fugit? Lorem, ipsum dolor sit amet
-                consectetur.</span
-              >
-              <div class="infostatus">
-                Status :
-                <i class="fa fa-check-circle" style="color: greenyellow"></i>
-                Completed
               </div>
               <button class="btn infoeditbtn">Edit</button>
             </li>
           </ul>
+
+          <ul class="taskinfolist hidden" id="notesTab"></ul>
         </div>
       </div>
 
