@@ -70,7 +70,7 @@
                 <button class="sequencer btn">
                   <i class="fa fa-bars" style="color: #fff"></i>
                 </button>
-                <button class="deletetaskbtn btn">
+                <button class="deletetaskbtn btn deletebtn">
                   <i class="fa fa-trash" style="color: rgb(194, 0, 0)"></i>
                 </button>
               </li>
@@ -84,7 +84,6 @@
                   <i class="fa fa-trash" style="color: rgb(194, 0, 0)"></i>
                 </button>
               </li>
-              
             </ul>
             <div class="prompts">
               <input
@@ -206,6 +205,26 @@
             </li>
           </ul>
         </div>
+      </div>
+
+      <div class="modalbox">
+        <h4>Delete?</h4>
+        <p class="span1">Do you want to this note?</p>
+        <span class="span2"
+          ><p>Title : Task 1</p>
+          <p>Description : Task Description</p></span
+        >
+        <span class="buttons"
+          ><button
+            class="btn confirmbtn"
+            style="background-color: var(--success)"
+          >
+            Yes
+          </button>
+          <button class="btn cancelbtn" style="background-color: var(--danger)">
+            No
+          </button></span
+        >
       </div>
     </main>
     <script src="scripts/script.js"></script>

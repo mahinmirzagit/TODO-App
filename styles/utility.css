@@ -6,6 +6,9 @@
   letter-spacing: 1px;
   font-weight: lighter;
 }
+body {
+  overflow: hidden;
+}
 :root {
   --primary: #7c4dff;
   --secondary: #00e5ff;
@@ -90,30 +93,39 @@ a {
 .tasklist li:hover {
   background-color: var(--bg-outer-card-lighter);
 }
-i:hover {
+.tasklist i:hover {
   transform: scale(1.2);
+}
+.tasklist i:active {
+  transform: scale(1);
 }
 .note-descrip:focus,
 .prompttext:focus {
   background-color: var(--bg-outer-card-lighter);
 }
-.submitresponse:hover{
-  background-color: var(--success)
+.submitresponse:hover {
+  background-color: var(--darker-success);
 }
-.submitresponse:active{
-  background-color: var(--darker-success)
+.submitresponse:active {
+  background-color: var(--success);
 }
-.sidetabbtns:hover{
+.sidetabbtns:hover {
   background-color: var(--bg-inner-card);
 }
-.infocard:hover{
+.infocard:hover {
   background-color: var(--bg-inner-card);
 }
-.infocard button:hover{
+.infocard button:hover {
   opacity: 0.7;
 }
-.infocard button:active{
+.infocard button:active {
   opacity: 1;
+}
+.modalbox .buttons > button:hover {
+  filter: brightness(0.8);
+}
+.modalbox .buttons > button:active {
+  filter: brightness(1);
 }
 
 @keyframes checkbox-checked {
