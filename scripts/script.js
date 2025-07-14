@@ -1,16 +1,23 @@
+const infoTab1 = document.getElementById("infoTab");
+const editForm = document.getElementById("edit-form");
+const viewFields = document.getElementById("viewFields");
+const modalHeading = document.getElementById("modal-title");
+const modalBodyText = document.getElementById("modal-body-text");
+const editTitleInput = document.getElementById("editTitle");
+const editDescInput = document.getElementById("editDesc");
+const editStatusInput = document.getElementById("editStatus");
+
+let editingTask = null;
 let promtText = document.querySelector(".prompttext");
 let descrip = document.querySelector(".note-descrip");
 let addBtn = document.querySelector(".submitresponse");
 
-// LEFT TASK TAB BUTTONS
 const taskTabButtons = document.querySelectorAll(".navlinks .tabbtns");
 const taskTabContents = document.querySelectorAll("[data-tab-content]");
 
-// RIGHT SIDEBAR TABS
 const sideTabButtons = document.querySelectorAll(".sidetabnavs .sidetabbtns");
 const infoTab = document.getElementById("infoTab");
 const notesTab1 = document.getElementById("notesTab");
-// (optional) upcomingTab if you create one
 
 let activeTab = "daily";
 
@@ -28,12 +35,12 @@ let isNoteMode = false;
 let completedTaskTitle = "";
 const notesTab = document.getElementById("notesTab");
 
-taskTabButtons.forEach(btn => {
+taskTabButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    taskTabButtons.forEach(b => b.classList.remove("active"));
+    taskTabButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     activeTab = btn.dataset.tab;
-    taskTabContents.forEach(list => {
+    taskTabContents.forEach((list) => {
       list.classList.toggle("hidden", list.id !== activeTab);
     });
     updateProgress();
@@ -41,17 +48,15 @@ taskTabButtons.forEach(btn => {
 });
 sideTabButtons.forEach((btn, index) => {
   btn.addEventListener("click", () => {
-    sideTabButtons.forEach(b => b.classList.remove("active2"));
+    sideTabButtons.forEach((b) => b.classList.remove("active2"));
     btn.classList.add("active2");
 
-    // Toggle right panel views
-    const tabs = [infoTab, notesTab]; // Add upcomingTab if needed
+    const tabs = [infoTab, notesTab];
     tabs.forEach((tab, i) => {
       tab.classList.toggle("hidden", i !== index);
     });
   });
 });
-
 
 addBtn.addEventListener("click", function () {
   const title = promtText.value.trim();
@@ -60,39 +65,45 @@ addBtn.addEventListener("click", function () {
   if (title === "") return;
 
   if (isNoteMode) {
-  const noteItem = document.createElement("li");
-  noteItem.classList.add("infocard");
+    const noteItem = document.createElement("li");
+    noteItem.classList.add("infocard");
 
-  const now = new Date();
-  const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const dateString = now.toLocaleDateString();
-  const weekday = now.toLocaleDateString(undefined, { weekday: 'long' });
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const dateString = now.toLocaleDateString();
+    const weekday = now.toLocaleDateString(undefined, { weekday: "long" });
 
-  // Get title and description from completed task (if still in DOM)
-  const matchingTask = Array.from(document.querySelectorAll(".tasklist li"))
-    .find(task => task.querySelector(".tasktitle")?.textContent === completedTaskTitle);
+    const matchingTask = Array.from(
+      document.querySelectorAll(".tasklist li")
+    ).find(
+      (task) =>
+        task.querySelector(".tasktitle")?.textContent === completedTaskTitle
+    );
 
-  const taskDescription = matchingTask?.getAttribute("data-desc") || "(no description)";
+    const taskDescription =
+      matchingTask?.getAttribute("data-desc") || "(no description)";
 
-  noteItem.innerHTML = `
+    noteItem.innerHTML = `
     <h3 class="infotitle">${completedTaskTitle}</h3>
     <span class="infodesc"><strong>Task Description:</strong> ${taskDescription}</span>
-    <span class="infodesc"><strong>Note:</strong> ${note || "(no note provided)"}</span>
+    <span class="infodesc"><strong>Note:</strong> ${
+      note || "(no note provided)"
+    }</span>
     <div class="infostatus">Saved on ${weekday}, ${dateString} at ${timeString}</div>
-    <button class="btn infoeditbtn">Edit</button>
   `;
 
-  notesTab.appendChild(noteItem);
+    notesTab.appendChild(noteItem);
 
-  // Reset
-  promtText.value = "";
-  descrip.value = "";
-  descrip.placeholder = "Description";
-  addBtn.textContent = "Add New Task";
-  isNoteMode = false;
-  completedTaskTitle = "";
-}
- else {
+    promtText.value = "";
+    descrip.value = "";
+    descrip.placeholder = "Description";
+    addBtn.textContent = "Add New Task";
+    isNoteMode = false;
+    completedTaskTitle = "";
+  } else {
     addTask(promtText);
     promtText.value = "";
     descrip.value = "";
@@ -140,6 +151,8 @@ function addTask(promt) {
       completedTaskTitle = promtText.value;
     } else {
       newTask.classList.remove("disabled");
+      refreshInfoTab();
+
       updateProgress();
     }
   });
@@ -181,7 +194,37 @@ function attachDeleteEvent(btn, taskItem) {
     const desc = taskItem.getAttribute("data-desc") || "(no description)";
     modalTitle.textContent = `Title: ${title}`;
     modalDesc.textContent = `Description: ${desc}`;
+
+    modalHeading.textContent = "Delete?";
+    modalBodyText.style.display = "block";
+    viewFields.style.display = "flex";
+    editForm.style.display = "none";
+    confirmBtn.style.display = "inline-block";
+
     taskToDelete = taskItem;
+    editingTask = null;
+    modal.classList.add("show");
+  });
+}
+function attachEditEvent(btn, taskItem) {
+  btn.addEventListener("click", () => {
+    const title = taskItem.querySelector(".tasktitle").textContent.trim();
+    const desc = taskItem.getAttribute("data-desc") || "";
+
+    modalHeading.textContent = "Edit Task";
+    modalBodyText.style.display = "none";
+    viewFields.style.display = "none";
+    editForm.style.display = "flex";
+    confirmBtn.textContent = "Save";
+    confirmBtn.style.display = "inline-block";
+
+    editTitleInput.value = title;
+    editDescInput.value = desc;
+    editStatusInput.value = taskItem.classList.contains("disabled")
+      ? "complete"
+      : "incomplete";
+
+    editingTask = taskItem;
     modal.classList.add("show");
   });
 }
@@ -192,6 +235,28 @@ confirmBtn.addEventListener("click", () => {
     taskToDelete = null;
     modal.classList.remove("show");
     updateProgress();
+    refreshInfoTab();
+  } else if (editingTask) {
+    const newTitle = editTitleInput.value.trim();
+    const newDesc = editDescInput.value.trim();
+    const newStatus = editStatusInput.value;
+
+    if (newTitle !== "") {
+      editingTask.querySelector(".tasktitle").textContent = newTitle;
+      editingTask.setAttribute("data-desc", newDesc);
+
+      if (newStatus === "complete") {
+        editingTask.classList.add("disabled");
+        editingTask.querySelector(".checkbox").checked = true;
+      } else {
+        editingTask.classList.remove("disabled");
+        editingTask.querySelector(".checkbox").checked = false;
+      }
+
+      modal.classList.remove("show");
+      updateProgress();
+      refreshInfoTab();
+    }
   }
 });
 
@@ -204,5 +269,38 @@ document.querySelectorAll(".tasklist li").forEach((task) => {
   const deleteBtn = task.querySelector(".deletetaskbtn");
   if (deleteBtn) attachDeleteEvent(deleteBtn, task);
 });
+
+function refreshInfoTab() {
+  infoTab.innerHTML = "";
+  const taskList = document.getElementById(activeTab);
+  const tasks = taskList.querySelectorAll("li");
+
+  tasks.forEach((task) => {
+    const title = task.querySelector(".tasktitle")?.textContent || "Untitled";
+    const desc = task.getAttribute("data-desc") || "(no description)";
+    const status = task.querySelector(".checkbox")?.checked
+      ? "Completed"
+      : "Incompleted";
+
+    const infoItem = document.createElement("li");
+    infoItem.classList.add("infocard");
+    infoItem.innerHTML = `
+      <h3 class="infotitle">${title}</h3>
+      <span class="infodesc"><strong>Description:</strong> ${desc}</span>
+      <div class="infostatus">
+        Status:
+        <i class="fa ${
+          status === "Completed" ? "fa-check-circle" : "fa-cancel"
+        }" style="color: ${
+      status === "Completed" ? "greenyellow" : "red"
+    }"></i> ${status}
+      </div>
+      <button class="btn infoeditbtn">Edit</button>
+    `;
+    const editBtn = infoItem.querySelector(".infoeditbtn");
+    attachEditEvent(editBtn, task);
+    infoTab.appendChild(infoItem);
+  });
+}
 
 updateProgress();
